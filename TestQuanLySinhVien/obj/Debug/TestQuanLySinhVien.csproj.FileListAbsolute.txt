@@ -1,0 +1,9 @@
+C:\Users\ADMIN\Desktop\Train C#\TestQuanLySinhVien\TestQuanLySinhVien\bin\Debug\TestQuanLySinhVien.exe.config
+C:\Users\ADMIN\Desktop\Train C#\TestQuanLySinhVien\TestQuanLySinhVien\bin\Debug\TestQuanLySinhVien.exe
+C:\Users\ADMIN\Desktop\Train C#\TestQuanLySinhVien\TestQuanLySinhVien\bin\Debug\TestQuanLySinhVien.pdb
+C:\Users\ADMIN\Desktop\Train C#\TestQuanLySinhVien\TestQuanLySinhVien\obj\Debug\TestQuanLySinhVien.csprojAssemblyReference.cache
+C:\Users\ADMIN\Desktop\Train C#\TestQuanLySinhVien\TestQuanLySinhVien\obj\Debug\TestQuanLySinhVien.Form1.resources
+C:\Users\ADMIN\Desktop\Train C#\TestQuanLySinhVien\TestQuanLySinhVien\obj\Debug\TestQuanLySinhVien.Properties.Resources.resources
+C:\Users\ADMIN\Desktop\Train C#\TestQuanLySinhVien\TestQuanLySinhVien\obj\Debug\TestQuanLySinhVien.csproj.GenerateResource.cache
+C:\Users\ADMIN\Desktop\Train C#\TestQuanLySinhVien\TestQuanLySinhVien\obj\Debug\TestQuanLySinhVien.exe
+C:\Users\ADMIN\Desktop\Train C#\TestQuanLySinhVien\TestQuanLySinhVien\obj\Debug\TestQuanLySinhVien.pdb

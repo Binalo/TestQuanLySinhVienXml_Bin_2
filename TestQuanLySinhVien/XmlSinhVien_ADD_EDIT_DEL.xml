@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<BIZREQUEST>
+  <DATAAREA>
+    <VOUCHERS>
+      <HEADER SinhvienPrkID="97" SinhvienID="092144221" SinhvienName="Trần Thanh Bình" SinhvienAddr="HCM" SinhvienEmail="Binh@gmail.com" SinhvienPhone="03222135" />
+      <HEADER SinhvienPrkID="98" SinhvienID="03252353" SinhvienName="Trần Ngọc Trâm" SinhvienAddr="HCM" SinhvienEmail="Rom@gmail.com" SinhvienPhone="098765678" />
+      <HEADER SinhvienPrkID="99" SinhvienID="321414" SinhvienName="Văn Mỹ Phương" SinhvienAddr="Huế" SinhvienEmail="Phuongdht@gmail.com" SinhvienPhone="385798375" />
+    </VOUCHERS>
+  </DATAAREA>
+</BIZREQUEST>

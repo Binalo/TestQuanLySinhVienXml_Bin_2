@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<BIZREQUEST>
+
+
+  <DATAAREA>
+
+
+    <VOUCHERS>
+
+
+      <VLINES>
+
+        <LINE SinhvienAddr="Huê" SinVienName="Nguyễn Văn An" SinhvienID="012345" SinhvienPrkID="94"/>
+
+      </VLINES>
+
+    </VOUCHERS>
+
+  </DATAAREA>
+
+</BIZREQUEST>

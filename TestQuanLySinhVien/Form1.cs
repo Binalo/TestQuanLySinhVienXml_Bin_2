@@ -103,5 +103,22 @@ namespace TestQuanLySinhVien
             SinvienDBMng.XoaSinhVien(sv);
             loadfile();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            int row = 0;
+            SinvienDBMng sv = new SinvienDBMng();
+            XmlDocument xmldoc = sv.GetDanhsachSinvien();
+            XmlNode root = xmldoc.DocumentElement;
+            foreach (XmlElement item in root.ChildNodes)
+            {
+                listView1.Rows.Add();
+                listView1.Rows[row].Cells[0].Value = item.GetAttribute("SinhvienPrkID");
+                listView1.Rows[row].Cells[1].Value = item.GetAttribute("SinhvienID");
+                listView1.Rows[row].Cells[2].Value = item.GetAttribute("SinhvienName");
+                listView1.Rows[row].Cells[3].Value = item.GetAttribute("SinhvienAddr");
+                row++;
+            }
+        }
     }
 }

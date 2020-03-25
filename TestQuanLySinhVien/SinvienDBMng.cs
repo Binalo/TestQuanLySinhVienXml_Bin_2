@@ -9,7 +9,6 @@ using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.XPath;
-using System.Data.SqlClient;
 namespace TestQuanLySinhVien
 {
     class SinvienDBMng
@@ -122,6 +121,46 @@ namespace TestQuanLySinhVien
                 cnn.Close();
             }
             return !(rowEft == 0);
+        }
+        public XmlDocument GetDanhsachSinvien()
+        {
+            XmlDocument docDb = new XmlDocument();
+            XmlElement goc = docDb.CreateElement("goc");
+            string connetionString = null;
+            connetionString = "Data Source=.;Initial Catalog=QLSinhVien;User ID=sa;Password=123";
+            SqlConnection cnn = new SqlConnection(connetionString);
+            
+            cnn.Open();
+            string DB = @"select PrkID, ID, Name, Addr from SinhVien";
+            SqlCommand cmd = new SqlCommand(DB,cnn);
+            //doc DB sang Xml
+            SqlDataReader dbReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            while (dbReader.Read())
+            {
+                XmlElement LINE = docDb.CreateElement("LINE");
+
+                XmlAttribute SinhvienPrkID = docDb.CreateAttribute("SinhvienPrkID");
+                SinhvienPrkID.Value = Convert.ToString(dbReader["PrkID"]);
+                LINE.Attributes.Append(SinhvienPrkID);
+
+                XmlAttribute SinhvienID = docDb.CreateAttribute("SinhvienID");
+                SinhvienID.Value = Convert.ToString(dbReader["ID"]);
+                LINE.Attributes.Append(SinhvienID);
+
+                XmlAttribute SinhvienName = docDb.CreateAttribute("SinhvienName");
+                SinhvienName.Value = Convert.ToString(dbReader["Name"]);
+                LINE.Attributes.Append(SinhvienName);
+
+                XmlAttribute SinhvienAddr = docDb.CreateAttribute("SinhvienAddr");
+                SinhvienAddr.Value = Convert.ToString(dbReader["Addr"]);
+                LINE.Attributes.Append(SinhvienAddr);
+                goc.AppendChild(LINE);
+            }
+            docDb.AppendChild(goc);
+            dbReader.Close();
+            cnn.Close();
+
+            return docDb;
         }
     }
     }

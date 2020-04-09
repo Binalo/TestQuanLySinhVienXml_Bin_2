@@ -51,7 +51,7 @@
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnDel = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.btnDoc = new System.Windows.Forms.Button();
+            this.btnAdd = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.listView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -226,7 +226,7 @@
             // btnSave
             // 
             this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.Location = new System.Drawing.Point(968, 370);
+            this.btnSave.Location = new System.Drawing.Point(885, 366);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(104, 39);
             this.btnSave.TabIndex = 13;
@@ -259,7 +259,7 @@
             // button4
             // 
             this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.Location = new System.Drawing.Point(1059, 559);
+            this.button4.Location = new System.Drawing.Point(968, 559);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(104, 39);
             this.button4.TabIndex = 16;
@@ -267,23 +267,23 @@
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
-            // btnDoc
+            // btnAdd
             // 
-            this.btnDoc.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDoc.Location = new System.Drawing.Point(885, 556);
-            this.btnDoc.Name = "btnDoc";
-            this.btnDoc.Size = new System.Drawing.Size(104, 39);
-            this.btnDoc.TabIndex = 17;
-            this.btnDoc.Text = "Load File";
-            this.btnDoc.UseVisualStyleBackColor = true;
-            this.btnDoc.Click += new System.EventHandler(this.btnDoc_Click);
+            this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAdd.Location = new System.Drawing.Point(1059, 366);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(104, 39);
+            this.btnAdd.TabIndex = 18;
+            this.btnAdd.Text = "Add";
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1224, 644);
-            this.Controls.Add(this.btnDoc);
+            this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.btnDel);
             this.Controls.Add(this.btnEdit);
@@ -329,13 +329,13 @@
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnDel;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button btnDoc;
         private System.Windows.Forms.DataGridViewTextBoxColumn sinhvienprkid;
         private System.Windows.Forms.DataGridViewTextBoxColumn sinhvienid;
         private System.Windows.Forms.DataGridViewTextBoxColumn sinhvienname;
         private System.Windows.Forms.DataGridViewTextBoxColumn sinhvienaddr;
         private System.Windows.Forms.DataGridViewTextBoxColumn sinhvienemail;
         private System.Windows.Forms.DataGridViewTextBoxColumn sinhvienphone;
+        private System.Windows.Forms.Button btnAdd;
     }
 }
 

@@ -82,9 +82,5 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="XmlSinhVien_ADD_EDIT_DEL.xml" />
-    <Content Include="XmlSinhVien_View.xml" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

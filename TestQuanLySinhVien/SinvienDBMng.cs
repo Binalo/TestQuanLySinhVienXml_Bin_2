@@ -13,115 +13,85 @@ namespace TestQuanLySinhVien
 {
     class SinvienDBMng
     {
-        
-
-        public static bool Themsinhvien(SinhVienXml XmlDoc)
+        public  void LuuDB(string connect, XmlDocument Xmldoc)
         {
-            XElement sv = new XElement("HEADER",
-                new XAttribute("SinhvienPrkID", XmlDoc.PrkId),
-                new XAttribute("SinhvienID", XmlDoc.Id),
-                new XAttribute("SinhvienName", XmlDoc.Name),
-                new XAttribute("SinhvienAddr", XmlDoc.Addr),
-                new XAttribute("SinhvienEmail", XmlDoc.Email),
-                new XAttribute("SinhvienPhone", XmlDoc.Phone));
-            XmlDocument doc = new XmlDocument();
-            string filename = @"C:\Users\ADMIN\Desktop\Train C#\TestQuanLySinhVien\TestQuanLySinhVien\XmlSinhVien_ADD_EDIT_DEL.xml";
-            doc.Load(filename);
-            XPathNavigator nav = doc.CreateNavigator();
-            nav.SelectSingleNode(@"BIZREQUEST/DATAAREA/VOUCHERS[last()]").AppendChild(sv.ToString());
-            doc.Save(filename);
+            XmlNode voucher = Xmldoc.SelectSingleNode("//VOUCHERS");
+
+            int rowAffected = 0;
+            SqlConnection connection = new SqlConnection(connect);
+            SqlCommand cmd = new SqlCommand();
+            connection.Open();
+            foreach (XmlElement item in voucher.ChildNodes)
+            {
+                cmd.CommandText = @"insert into Sinhvien values(
+                                        @PrkId,@Id
+                                        ,@Name,@Addr
+                                        ,@Email,@Phone)";
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = connection;
+                cmd.Parameters.AddWithValue("@PrkId", item.GetAttribute("SinhvienPrkID"));
+                cmd.Parameters.AddWithValue("@Id", item.GetAttribute("SinhvienID"));
+                cmd.Parameters.AddWithValue("@Name", item.GetAttribute("SinhvienName"));
+                cmd.Parameters.AddWithValue("@Addr", item.GetAttribute("SinhvienAddr"));
+                cmd.Parameters.AddWithValue("@Email", item.GetAttribute("SinhvienEmail"));
+                cmd.Parameters.AddWithValue("@Phone", item.GetAttribute("SinhvienPhone"));
+                rowAffected = cmd.ExecuteNonQuery();
+                cmd.Parameters.Clear();
+            }
+
+            connection.Close();
+
+        }
+
+        public  void FixSv(string connect , XmlDocument Xmldoc)
+        {
 
             ///////////////////////////
             //Thao tac  voi DB
-            int rowEft;
-            string connetionString = null;
-            connetionString = "Data Source=.;Initial Catalog=QLSinhVien;User ID=sa;Password=123";
-            using (SqlConnection cnn = new SqlConnection(connetionString))
-            {
-                string String = @"Insert into SinhVien Values(@PrkId,@Id,@Name,@Addr,@Email,@Phone)";
-                SqlCommand Cmd = new SqlCommand(String, cnn);
-                Cmd.Parameters.AddWithValue("@Id", XmlDoc.Id);
-                Cmd.Parameters.AddWithValue("@PrkId", XmlDoc.PrkId);
-                Cmd.Parameters.AddWithValue("@Name", XmlDoc.Name);
-                Cmd.Parameters.AddWithValue("@Addr", XmlDoc.Addr);
-                Cmd.Parameters.AddWithValue("@Email", XmlDoc.Email);
-                Cmd.Parameters.AddWithValue("@Phone", XmlDoc.Phone);
-                cnn.Open();
-                rowEft = Cmd.ExecuteNonQuery();
-                cnn.Close();
-            }
-            return !(rowEft == 0);
+            XmlNode voucher = (XmlElement)Xmldoc.SelectSingleNode("//VOUCHERS");
+            XmlElement header = (XmlElement)voucher.SelectSingleNode("HEADER");
+            
+            int rowAffected = 0;
+            SqlConnection connection = new SqlConnection(connect);
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = @"update Sinhvien 
+                                    set Name=@Name,
+                                        Addr=@Addr,
+                                        Email=@Email,
+                                        Phone=@Phone
+                                  where PrkId=@PrkId";
+            cmd.CommandType = CommandType.Text;
+            cmd.Connection = connection;
+            connection.Open();
+            cmd.Parameters.AddWithValue("@PrkId", header.GetAttribute("SinhvienPrkID"));
+            cmd.Parameters.AddWithValue("@Name", header.GetAttribute("SinhvienName"));   
+            cmd.Parameters.AddWithValue("@Addr", header.GetAttribute("SinhvienAddr"));
+            cmd.Parameters.AddWithValue("@Email", header.GetAttribute("SinhvienEmail"));
+            cmd.Parameters.AddWithValue("@Phone", header.GetAttribute("SinhvienPhone"));
+            rowAffected = cmd.ExecuteNonQuery();
+            connection.Close();
+
         }
 
-        public static bool Suasinhvien(SinhVienXml XmlDoc)
-        {
-
-            XmlDocument doc = new XmlDocument();
-            string filename = @"C:\Users\ADMIN\Desktop\Train C#\TestQuanLySinhVien\TestQuanLySinhVien\XmlSinhVien_ADD_EDIT_DEL.xml";
-            doc.Load(filename);
-            XPathNavigator nav = doc.CreateNavigator();
-            XPathNavigator sv = nav.SelectSingleNode($"BIZREQUEST/DATAAREA/VOUCHERS/HEADER[@SinhvienPrkID='{XmlDoc.PrkId}']");
-            sv.SelectSingleNode("@SinhvienID").SetValue(XmlDoc.Id);
-            sv.SelectSingleNode("@SinhvienName").SetValue(XmlDoc.Name);
-            sv.SelectSingleNode("@SinhvienAddr").SetValue(XmlDoc.Addr);
-            sv.SelectSingleNode("@SinhvienEmail").SetValue(XmlDoc.Email);
-            sv.SelectSingleNode("@SinhvienPhone").SetValue(XmlDoc.Phone);
-
-            doc.Save(filename);
-
-            /////////////////////////////////
-            ///Thao tac voi DB
-            int rowEft;
-            string connetionString = null;
-            connetionString = "Data Source=.;Initial Catalog=QLSinhVien;User ID=sa;Password=123";
-            using (SqlConnection cnn = new SqlConnection(connetionString))
-            {
-                string String = @"Update SinhVien set Id=@Id, Name = @Name, Addr = @Addr, Email = @Email,
-                 Phone = @Phone Where Prkid = @Prkid";
-                SqlCommand Cmd = new SqlCommand(String, cnn);
-                Cmd.Parameters.AddWithValue("@Id", XmlDoc.Id);
-                Cmd.Parameters.AddWithValue("@PrkId", XmlDoc.PrkId);
-                Cmd.Parameters.AddWithValue("@Name", XmlDoc.Name);
-                Cmd.Parameters.AddWithValue("@Addr", XmlDoc.Addr);
-                Cmd.Parameters.AddWithValue("@Email", XmlDoc.Email);
-                Cmd.Parameters.AddWithValue("@Phone", XmlDoc.Phone);
-                cnn.Open();
-                rowEft = Cmd.ExecuteNonQuery();
-                cnn.Close();
-            }
-            return !(rowEft == 0);
         
-    }
-
-        public static bool XoaSinhVien(SinhVienXml XmlDoc)
-        {
-            string path = @"C:\Users\ADMIN\Desktop\Train C#\TestQuanLySinhVien\TestQuanLySinhVien\XmlSinhVien_ADD_EDIT_DEL.xml";
-
-            XmlDocument editDoc = new XmlDocument();
-            editDoc.Load(path);
-            XPathNavigator editNav = editDoc.CreateNavigator();
-            XPathNavigator student = editNav.SelectSingleNode($"BIZREQUEST/DATAAREA/VOUCHERS/HEADER[@SinhvienPrkID='{XmlDoc.PrkId}']");
-            student.DeleteSelf();
-            editDoc.Save(path);
-
-            /////////////////////////////////
-            ///Thao tac voi DB
-            int rowEft;
-            string connetionString = null;
-            connetionString = "Data Source=.;Initial Catalog=QLSinhVien;User ID=sa;Password=123";
-            using (SqlConnection cnn = new SqlConnection(connetionString))
+            public void Xoasinhvien(string connectionString, XmlDocument Xmldoc)
             {
-                string String = @"Delete from SinhVien where PrkId=@PrkId";
-                 
-                SqlCommand Cmd = new SqlCommand(String, cnn);
-                Cmd.Parameters.AddWithValue("@PrkId", XmlDoc.PrkId);
-                
-                cnn.Open();
-                rowEft = Cmd.ExecuteNonQuery();
-                cnn.Close();
+                XmlNode voucher = (XmlElement)Xmldoc.SelectSingleNode("//VOUCHERS");
+                XmlElement header = (XmlElement)voucher.SelectSingleNode("HEADER");
+                int rowAffected = 0;
+                SqlConnection connection = new SqlConnection(connectionString);
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = @"delete from Sinhvien where PrkId=@PrkId";
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = connection;
+                connection.Open();
+                cmd.Parameters.AddWithValue("@PrkId", header.GetAttribute("SinhvienPrkID"));
+                rowAffected = cmd.ExecuteNonQuery();
+                connection.Close();
+
             }
-            return !(rowEft == 0);
-        }
+
+        
         public XmlDocument GetDanhsachSinvien()
         {
             XmlDocument docDb = new XmlDocument();
